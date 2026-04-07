@@ -16,7 +16,7 @@ Replaces Pi's boring default spinner with a **magenta → purple → cyan gradie
 ## 📦 Install
 
 ```bash
-pi install npm:@jabbslad/pi-shimmer
+pi install git:github.com/Jabbslad/pi-shimmer
 ```
 
 That's it. No config. No build step. Just vibes. 🫧

@@ -30,7 +30,7 @@ A Pi extension that replaces the default "Working..." spinner with a rainbow shi
 - No test suite currently exists.
 - The shimmer algorithm is ported from [pi-animations](https://github.com/arpagon/pi-animations) by arpagon.
 - Verb list is ported from Claude Code's spinner.
-- Published as `@jabbslad/pi-shimmer` via `pi install npm:@jabbslad/pi-shimmer`.
+- Install via `pi install git:github.com/Jabbslad/pi-shimmer`.
 
 ## Change guidelines
 
