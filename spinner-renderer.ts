@@ -80,7 +80,7 @@ export function resetStallState(): void {
 // Shimmer renderer — pi-animations shimmer + stall blending
 // ============================================================================
 
-function renderShimmer(text: string, frame: number, stall: number): string {
+function renderShimmer(text: string, frame: number, stall: number, intensity: number = 1.0): string {
 	// Blend base color toward stall red
 	const baseR = lerp(BASE[0], STALL_BASE[0], stall);
 	const baseG = lerp(BASE[1], STALL_BASE[1], stall);
@@ -91,7 +91,7 @@ function renderShimmer(text: string, frame: number, stall: number): string {
 		const wave = Math.sin((i - frame * 0.3) * 0.8);
 		if (wave > 0.3) {
 			// Character is in the shimmer highlight
-			const intensity = (wave - 0.3) / 0.7;
+			const charIntensity = ((wave - 0.3) / 0.7) * intensity;
 			const gi = Math.floor((i + frame * 0.5) % (PI_GRAD.length * 2));
 			const gIdx = gi < PI_GRAD.length ? gi : PI_GRAD.length * 2 - 1 - gi;
 			const gc = PI_GRAD[Math.min(gIdx, PI_GRAD.length - 1)];
@@ -101,9 +101,9 @@ function renderShimmer(text: string, frame: number, stall: number): string {
 			const gcG = lerp(gc[1], STALL_RED[1], stall);
 			const gcB = lerp(gc[2], STALL_RED[2], stall);
 
-			const r = lerp(baseR, gcR, intensity);
-			const g = lerp(baseG, gcG, intensity);
-			const b = lerp(baseB, gcB, intensity);
+			const r = lerp(baseR, gcR, charIntensity);
+			const g = lerp(baseG, gcG, charIntensity);
+			const b = lerp(baseB, gcB, charIntensity);
 			line += bold + rgb(r, g, b) + text[i] + nobold;
 		} else {
 			line += rgb(baseR, baseG, baseB) + text[i];
@@ -161,7 +161,8 @@ export function renderSpinnerFrame(input: SpinnerFrameInput): string {
 		if (tokenCount > 0) {
 			parts.push(`↓ ${formatNumber(tokenCount)} tokens`);
 		}
-		suffix = " " + rgb(140, 140, 140) + "(" + parts.join(" · ") + ")";
+		const suffixText = " (" + parts.join(" · ") + ")";
+		suffix = renderShimmer(suffixText, frame, stall, 0.3);
 	}
 
 	return shimmer + suffix + reset;
