@@ -1,0 +1,25 @@
+{
+  "name": "@jabbslad/pi-shimmer",
+  "version": "0.1.0",
+  "description": "Rainbow shimmer spinner with Claude Code verbs for Pi",
+  "license": "MIT",
+  "author": "jabbslad",
+  "keywords": [
+    "pi-package"
+  ],
+  "peerDependencies": {
+    "@mariozechner/pi-coding-agent": "*"
+  },
+  "files": [
+    "index.ts",
+    "spinner-renderer.ts",
+    "spinner-verbs.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "index.ts"
+    ]
+  }
+}
